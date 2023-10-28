@@ -1,25 +1,34 @@
+"use client";
 import type { Metadata } from 'next'
-import { Inter, Open_Sans } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
 import './globals.css'
+import { useDataStore } from './store/useDataStore'
+import { useEffect } from 'react'
+import Header from './components/Header'
 
 const openSans = Open_Sans({
   subsets: ['latin'],
   weight: '400'
 })
 
-export const metadata: Metadata = {
-  title: 'Get Heroes - conheça vários heróis!',
-  description: 'Site de informações gerais sobre heróis.',
-}
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const { heroes, powerType, isLoading, error, fetchData, togglePower } = useDataStore();
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  if (error) return <div>Ocorreu um erro</div>;
   return (
     <html lang="pt-br">
-      <body className={openSans.className}>{children}</body>
+      <body className={openSans.className}>
+        <Header />
+        {children}
+        </body>
     </html>
   )
 }

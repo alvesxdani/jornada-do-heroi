@@ -1,27 +1,63 @@
-import React from 'react'
-import { AppBar } from '@mui/material'
-import Container from '@mui/material/Container'
+import React, { useState } from 'react'
 import { Montserrat } from 'next/font/google'
-import { Typography } from '@mui/material';
-import Toolbar from '@mui/material/Toolbar';
-import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import Link from 'next/link';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: '700'
+  weight: '700',
 })
 
 const Header = () => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  }
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  }
+
   return (
-  <AppBar className='bg-black p-2' elevation={1}>
-    <Container maxWidth="lg">
-    <Toolbar disableGutters>
-      <Typography variant='h5' fontWeight={700}>
-        Get Heroes
-      </Typography>
-      </Toolbar>
-    </Container>
-  </AppBar>
+    <>
+    <AppBar position="static" className='bg-black'>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleMenuClick}
+            className='mr-2'
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+          >
+            <Link href="/">
+            <MenuItem onClick={handleMenuClose}>Início</MenuItem>
+            </Link>
+            <Link href="/batalha">
+            <MenuItem onClick={handleMenuClose}>Batalha</MenuItem>
+            </Link>
+          </Menu>
+
+          <Typography variant="h6" className={montserrat.className}>Get Heroes</Typography>
+        </Toolbar>
+      </AppBar>
+    </>
   )
 }
 
