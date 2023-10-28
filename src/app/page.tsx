@@ -1,12 +1,13 @@
 "use client";
 
-import "./globals.css";
-import { useDataStore } from "./store/useDataStore";
+import Header from "./components/Header";
+// Imports
 import { useEffect } from "react";
+import { useDataStore } from "./store/useDataStore";
+import "./globals.css";
 
 export default function Home() {
-  const { heroes, powerType, isLoading, error, fetchData, togglePower } =
-    useDataStore();
+  const { heroes, powerType, isLoading, error, fetchData, togglePower } = useDataStore();
 
   useEffect(() => {
     fetchData();
@@ -17,12 +18,7 @@ export default function Home() {
   if (heroes)
     return (
       <>
-        {heroes.map((item) => (
-          <ul key={item.id} className="border mb-5">
-            <li>{item.id}</li>
-            <li>{item.name}</li>
-          </ul>
-        ))}
+       <Header />
       </>
     );
 }
