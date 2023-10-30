@@ -3,7 +3,7 @@ import { create } from 'zustand'
 import axios from 'axios'
 import { IDataStore } from '../interfaces/interfaces'
 
-const api = 'http://homologacao3.azapfy.com.br/api/ps/metahumans'
+const api = 'https://homologacao3.azapfy.com.br/api/ps/metahumans'
 
 export const useDataStore = create<IDataStore>((set) => ({
   heroes: [],
