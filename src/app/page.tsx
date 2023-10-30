@@ -52,7 +52,6 @@ export default function Home() {
             ) : (
               filteredHeroes.map((item) => {
                 let total = 0
-
                 if (
                   item.powerstats['intelligence'] !== undefined &&
                   !isNaN(item.powerstats['intelligence'])

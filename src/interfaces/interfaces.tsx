@@ -1,4 +1,4 @@
-import { SetStateAction } from "react"
+import { ReactNode, SetStateAction } from "react"
 
 export interface IHero {
     id: number
@@ -15,6 +15,7 @@ export interface IHero {
         gender: string
     ]
     images: {
+        xs: string
         sm: string
         md: string
     }
@@ -31,6 +32,7 @@ export interface ICardHeroes {
     title: string;
     subtitle: number;
     url: string;
+    description?: ReactNode
 }
 
 export interface ITitle {
